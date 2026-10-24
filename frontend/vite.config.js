@@ -1,11 +1,11 @@
-{
-  "name": "hcm-lite-web", "private": true, "version": "0.2.0", "type": "module",
-  "scripts": { "dev": "vite", "build": "vite build", "preview": "vite preview" },
-  "dependencies": {
-    "axios": "^1.6.7", "react": "^18.2.0", "react-dom": "^18.2.0",
-    "react-router-dom": "^6.22.1", "zustand": "^4.5.0"
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  esbuild: {
+    jsx: 'automatic',
+    jsxImportSource: 'react',
   },
-  "devDependencies": {
-    "@vitejs/plugin-react": "^4.2.1", "vite": "^5.1.0"
-  }
-}
+  server: { port: 5173 },
+})
