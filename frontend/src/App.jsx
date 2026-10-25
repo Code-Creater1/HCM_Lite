@@ -16,10 +16,16 @@ import LeaveTypes from './pages/LeaveTypes'
 import Holidays from './pages/Holidays'
 import CSVImport from './pages/CSVImport'
 import Employee360 from './pages/Employee360'
+import MyAttendance from './pages/MyAttendance'
+import MyLeave from './pages/MyLeave'
+import AttendanceBoard from './pages/AttendanceBoard'
+import LeaveApprovals from './pages/LeaveApprovals'
 
 const MENUS = {
   ADMIN: [
     { label: 'Dashboard', path: '/' },
+    { label: 'Attendance Board', path: '/admin/attendance' },
+    { label: 'Leave Approvals', path: '/admin/leave' },
     { label: 'Company Settings', path: '/admin/settings' },
     { label: 'Departments', path: '/admin/departments' },
     { label: 'Designations', path: '/admin/designations' },
@@ -32,9 +38,13 @@ const MENUS = {
     { label: 'Dashboard', path: '/' },
     { label: 'Employees', path: '/hr/employees' },
     { label: 'Bulk Import', path: '/hr/import' },
+    { label: 'Attendance Board', path: '/hr/attendance' },
+    { label: 'Leave Approvals', path: '/hr/leave' },
   ],
   EMPLOYEE: [
     { label: 'Dashboard', path: '/' },
+    { label: 'Attendance', path: '/me/attendance' },
+    { label: 'My Leave', path: '/me/leave' },
     { label: 'My Profile', path: '/me/profile' },
   ],
 }
@@ -103,6 +113,8 @@ function Shell() {
 
             {user.role === 'ADMIN' && (
               <>
+                <Route path="/admin/attendance" element={<AttendanceBoard />} />
+                <Route path="/admin/leave" element={<LeaveApprovals />} />
                 <Route path="/admin/settings" element={<CompanySettings />} />
                 <Route path="/admin/departments" element={<Departments />} />
                 <Route path="/admin/designations" element={<Designations />} />
@@ -119,11 +131,17 @@ function Shell() {
                 <Route path="/hr/employees" element={<HRSEmployees />} />
                 <Route path="/hr/employees/:id" element={<Employee360 />} />
                 <Route path="/hr/import" element={<CSVImport />} />
+                <Route path="/hr/attendance" element={<AttendanceBoard />} />
+                <Route path="/hr/leave" element={<LeaveApprovals />} />
               </>
             )}
 
             {user.role === 'EMPLOYEE' && (
-              <Route path="/me/profile" element={<MyProfile />} />
+              <>
+                <Route path="/me/profile" element={<MyProfile />} />
+                <Route path="/me/attendance" element={<MyAttendance />} />
+                <Route path="/me/leave" element={<MyLeave />} />
+              </>
             )}
 
             <Route path="*" element={<Navigate to="/" />} />
